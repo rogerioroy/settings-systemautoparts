@@ -9,21 +9,25 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_category")
-public class Category implements Serializable{
+@Table(name = "tb_taxcode")
+public class TaxCode implements Serializable{
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
+	private String cfop;
+	private String description;
+	private String application;
 	
-	public Category() {
+	public TaxCode() {
 	}
 
-	public Category(Long id, String name) {
+	public TaxCode(Long id, String cfop, String description, String application) {
 		this.id = id;
-		this.name = name;
+		this.cfop = cfop;
+		this.description = description;
+		this.application = application;
 	}
 
 	public Long getId() {
@@ -34,18 +38,35 @@ public class Category implements Serializable{
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getCfop() {
+		return cfop;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCfop(String cfop) {
+		this.cfop = cfop;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getApplication() {
+		return application;
+	}
+
+	public void setApplication(String application) {
+		this.application = application;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((cfop == null) ? 0 : cfop.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
@@ -58,7 +79,12 @@ public class Category implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Category other = (Category) obj;
+		TaxCode other = (TaxCode) obj;
+		if (cfop == null) {
+			if (other.cfop != null)
+				return false;
+		} else if (!cfop.equals(other.cfop))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
