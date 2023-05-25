@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.systemautoparts.settings.entities.TaxCode;
+import com.systemautoparts.settings.dto.TaxCodeDTO;
 import com.systemautoparts.settings.services.TaxCodeService;
 
 @RestController
@@ -19,8 +19,8 @@ public class TaxCodeResource {
 	private TaxCodeService service;
 	
 	@GetMapping
-	public ResponseEntity<List<TaxCode>> findAll() {
-		List<TaxCode> list = service.findAll();
+	public ResponseEntity<List<TaxCodeDTO>> findAll() {
+		List<TaxCodeDTO> list = service.findAll();
 		return ResponseEntity.ok().body(list);			
 	}
 }
