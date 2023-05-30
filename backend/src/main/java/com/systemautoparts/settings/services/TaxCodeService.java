@@ -1,6 +1,7 @@
 package com.systemautoparts.settings.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.systemautoparts.settings.dto.TaxCodeDTO;
 import com.systemautoparts.settings.entities.TaxCode;
 import com.systemautoparts.settings.repositories.TaxCodeRepository;
+import com.systemautoparts.settings.services.exceptions.EntityNotFoundException;
 
 @Service
 public class TaxCodeService {
@@ -21,5 +23,12 @@ public class TaxCodeService {
 	public List<TaxCodeDTO> findAll() {
 		List<TaxCode> list = repository.findAll();
 		return list.stream().map(x -> new TaxCodeDTO(x)).collect(Collectors.toList());
+	}
+	
+	@Transactional(readOnly = true)
+	public TaxCodeDTO findById(Long id) {
+		Optional<TaxCode> obj = repository.findById(id);
+		TaxCode entity = obj.orElseThrow(() -> new EntityNotFoundException("Entity not found"));
+		return new TaxCodeDTO(entity);
 	}		
 }
