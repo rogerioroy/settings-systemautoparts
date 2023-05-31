@@ -30,5 +30,15 @@ public class TaxCodeService {
 		Optional<TaxCode> obj = repository.findById(id);
 		TaxCode entity = obj.orElseThrow(() -> new EntityNotFoundException("Entity not found"));
 		return new TaxCodeDTO(entity);
-	}		
+	}
+	
+	@Transactional
+	public TaxCodeDTO insert(TaxCodeDTO dto) {
+		TaxCode entity = new TaxCode();
+		entity.setCfop(dto.getCfop());
+		entity.setApplication(dto.getApplication());
+		entity.setDescription(dto.getDescription());
+		entity = repository.save(entity);
+		return new TaxCodeDTO(entity);
+	}
 }
