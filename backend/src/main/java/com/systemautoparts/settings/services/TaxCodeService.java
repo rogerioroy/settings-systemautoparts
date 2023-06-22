@@ -1,14 +1,14 @@
 package com.systemautoparts.settings.services;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,9 +25,9 @@ public class TaxCodeService {
 	private TaxCodeRepository repository;
 
 	@Transactional(readOnly = true)
-	public List<TaxCodeDTO> findAll() {
-		List<TaxCode> list = repository.findAll();
-		return list.stream().map(x -> new TaxCodeDTO(x)).collect(Collectors.toList());
+	public Page<TaxCodeDTO> findAllPaged(PageRequest pageRequest) {
+		Page<TaxCode> list = repository.findAll(pageRequest);
+		return list.map(x -> new TaxCodeDTO(x));
 	}
 	
 	@Transactional(readOnly = true)
