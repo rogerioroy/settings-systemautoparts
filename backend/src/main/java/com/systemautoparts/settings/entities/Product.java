@@ -2,46 +2,53 @@ package com.systemautoparts.settings.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_taxcode")
-public class TaxCode implements Serializable{
+@Table(name = "tb_product")
+public class Product implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String cfop;
+	private String name;
 	
 	@Column(columnDefinition = "TEXT")
 	private String description;
-	
-	@Column(columnDefinition = "TEXT")
-	private String application;
-	
-	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private Instant createdAt;
-	
-	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private Instant updatedAt;
-	
-	public TaxCode() {
-	}
+	private Double price;
+	private String imgUrl;
 
-	public TaxCode(Long id, String cfop, String description, String application) {
+	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+	private Instant date;
+	
+	@ManyToMany
+	@JoinTable(name = "tb_product_category",
+			joinColumns = @JoinColumn(name = "product_id"),
+			inverseJoinColumns = @JoinColumn(name = "category_id"))
+	Set<Category> categories = new HashSet<>();
+
+	public Product() {
+	}
+	
+	public Product(Long id, String name, String description, Double price, String imgUrl, Instant date) {
 		this.id = id;
-		this.cfop = cfop;
+		this.name = name;
 		this.description = description;
-		this.application = application;
+		this.price = price;
+		this.imgUrl = imgUrl;
+		this.date = date;
 	}
 
 	public Long getId() {
@@ -52,12 +59,12 @@ public class TaxCode implements Serializable{
 		this.id = id;
 	}
 
-	public String getCfop() {
-		return cfop;
+	public String getName() {
+		return name;
 	}
 
-	public void setCfop(String cfop) {
-		this.cfop = cfop;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {
@@ -68,37 +75,38 @@ public class TaxCode implements Serializable{
 		this.description = description;
 	}
 
-	public String getApplication() {
-		return application;
+	public Double getPrice() {
+		return price;
 	}
 
-	public void setApplication(String application) {
-		this.application = application;
+	public void setPrice(Double price) {
+		this.price = price;
 	}
 
-	public Instant getCreatedAt() {
-		return createdAt;
+	public String getImgUrl() {
+		return imgUrl;
 	}
 
-	public Instant getUpdatedAt() {
-		return updatedAt;
-	}
-	
-	@PrePersist
-	public void prePersist() {
-		createdAt = Instant.now();
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
 	}
 
-	@PreUpdate
-	public void preUpdate() {
-		updatedAt = Instant.now();
+	public Instant getDate() {
+		return date;
 	}
-	
+
+	public void setDate(Instant date) {
+		this.date = date;
+	}
+
+	public Set<Category> getCategories() {
+		return categories;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((cfop == null) ? 0 : cfop.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
@@ -111,12 +119,7 @@ public class TaxCode implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TaxCode other = (TaxCode) obj;
-		if (cfop == null) {
-			if (other.cfop != null)
-				return false;
-		} else if (!cfop.equals(other.cfop))
-			return false;
+		Product other = (Product) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
