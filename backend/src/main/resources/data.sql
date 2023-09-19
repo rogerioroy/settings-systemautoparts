@@ -58,3 +58,14 @@ INSERT INTO tb_product_category (product_id, category_id) VALUES (25, 3);
 INSERT INTO tb_taxcode(CFOP, description, application, created_At) VALUES ('5405', 'Merchandise Sales' , 'Sales of goods acquired or received from third parties in an operation with goods subject to the tax substitution regime, as a substituted taxpayer', NOW());
 INSERT INTO tb_taxcode(CFOP, description, application, created_At) VALUES ('6404', 'Sale out of State' , 'Sales of goods subject to the tax substitution regime, as a tax substitute, exclusively in cases where the tax has already been previously withheld', NOW());
 INSERT INTO tb_taxcode(CFOP, description, application, created_At) VALUES ('5411', 'Return of Goods' , 'Returns of goods purchased to be sold, whose entries have been classified as “Purchase for sale in an operation with goods subject to the tax substitution regime', NOW());
+
+INSERT INTO tb_client(name, cpf, income, birth_Date, children) VALUES ('Pedro', '11111111111', 1320.00, TIMESTAMP WITH TIME ZONE '1982-07-15', 1);
+INSERT INTO tb_client(name, cpf, income, birth_Date, children) VALUES ('Maria', '22222222222', 1740.00, TIMESTAMP WITH TIME ZONE '1957-06-05', 5);
+INSERT INTO tb_client(name, cpf, income, birth_Date, children) VALUES ('Roberto', '33333333333', 2476.20, TIMESTAMP WITH TIME ZONE '1975-10-01', 2);
+INSERT INTO tb_client(name, cpf, income, birth_Date, children) VALUES ('Aluizio', '44444444444', 1320.74, TIMESTAMP WITH TIME ZONE '2000-01-01', 0);
+INSERT INTO tb_client(name, cpf, income, birth_Date, children) VALUES ('Mario Aguiar', '55555555555', 1654.120, TIMESTAMP WITH TIME ZONE '1998-06-12', 1);
+INSERT INTO tb_client(name, cpf, income, birth_Date, children) VALUES ('Valeria', '66666666666', 2124.45, TIMESTAMP WITH TIME ZONE '1976-06-22', 3);
+INSERT INTO tb_client(name, cpf, income, birth_Date, children) VALUES ('Priscilla', '77777777777', 4500.00, TIMESTAMP WITH TIME ZONE '1980-06-09', 1);
+INSERT INTO tb_client(name, cpf, income, birth_Date, children) VALUES ('Jorge', '88888888888', 2980.00, TIMESTAMP WITH TIME ZONE '2001-05-25', 4);
+INSERT INTO tb_client(name, cpf, income, birth_Date, children) VALUES ('Rodrigo', '99999999999', 7453.00, TIMESTAMP WITH TIME ZONE '1995-09-19', 2);
+INSERT INTO tb_client(name, cpf, income, birth_Date, children) VALUES ('Cavalcanti', '12345678901', 3600.50, TIMESTAMP WITH TIME ZONE '2006-11-25', 3);
